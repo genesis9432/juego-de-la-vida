@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Juego de la vida</title>
+	<style>
+		#grid{
+			display: grid;
+			grid-template-rows: repeat(10, 1fr);
+			grid-template-columns: repeat(10, 1fr);
+
+			height: 500px;
+			width: 500px;
+		}
+		#grid span{
+			height: 50px;
+			width: 50px;
+		}
+		#grid span{
+			background-color: black;
+			border: 1px green solid;
+		}
+		#grid span.alive{
+			background-color: green;
+			border: 1px black solid;
+		}
+	</style>
+</head>
+<body>
+	<h1>El juego de la vida</h1>
+	<div id="grid">
+		<span data-x="0" data-y="0"></span>
+		<span data-x="1" data-y="0"></span>
+		<span data-x="2" data-y="0"></span>
+		<span data-x="3" data-y="0"></span>
+		<span data-x="4" data-y="0"></span>
+		<span data-x="5" data-y="0"></span>
+		<span data-x="6" data-y="0"></span>
+		<span data-x="7" data-y="0"></span>
+		<span data-x="8" data-y="0"></span>
+		<span data-x="9" data-y="0"></span>
+		<span data-x="0" data-y="1"></span>
+		<span data-x="1" data-y="1"></span>
+		<span data-x="2" data-y="1"></span>
+		<span data-x="3" data-y="1"></span>
+		<span data-x="4" data-y="1"></span>
+		<span data-x="5" data-y="1"></span>
+		<span data-x="6" data-y="1"></span>
+		<span data-x="7" data-y="1"></span>
+		<span data-x="8" data-y="1"></span>
+		<span data-x="9" data-y="1"></span>
+		<span data-x="0" data-y="2"></span>
+		<span data-x="1" data-y="2"></span>
+		<span data-x="2" data-y="2"></span>
+		<span data-x="3" data-y="2"></span>
+		<span data-x="4" data-y="2"></span>
+		<span data-x="5" data-y="2"></span>
+		<span data-x="6" data-y="2"></span>
+		<span data-x="7" data-y="2"></span>
+		<span data-x="8" data-y="2"></span>
+		<span data-x="9" data-y="2"></span>
+		<span data-x="0" data-y="3"></span>
+		<span data-x="1" data-y="3"></span>
+		<span data-x="2" data-y="3"></span>
+		<span data-x="3" data-y="3"></span>
+		<span data-x="4" data-y="3"></span>
+		<span data-x="5" data-y="3"></span>
+		<span data-x="6" data-y="3"></span>
+		<span data-x="7" data-y="3"></span>
+		<span data-x="8" data-y="3"></span>
+		<span data-x="9" data-y="3"></span>
+		<span data-x="0" data-y="4"></span>
+		<span data-x="1" data-y="4"></span>
+		<span data-x="2" data-y="4"></span>
+		<span data-x="3" data-y="4"></span>
+		<span data-x="4" data-y="4"></span>
+		<span data-x="5" data-y="4"></span>
+		<span data-x="6" data-y="4"></span>
+		<span data-x="7" data-y="4"></span>
+		<span data-x="8" data-y="4"></span>
+		<span data-x="9" data-y="4"></span>
+		<span data-x="0" data-y="5"></span>
+		<span data-x="1" data-y="5"></span>
+		<span data-x="2" data-y="5"></span>
+		<span data-x="3" data-y="5"></span>
+		<span data-x="4" data-y="5"></span>
+		<span data-x="5" data-y="5"></span>
+		<span data-x="6" data-y="5"></span>
+		<span data-x="7" data-y="5"></span>
+		<span data-x="8" data-y="5"></span>
+		<span data-x="9" data-y="5"></span>
+		<span data-x="0" data-y="6"></span>
+		<span data-x="1" data-y="6"></span>
+		<span data-x="2" data-y="6"></span>
+		<span data-x="3" data-y="6"></span>
+		<span data-x="4" data-y="6"></span>
+		<span data-x="5" data-y="6"></span>
+		<span data-x="6" data-y="6"></span>
+		<span data-x="7" data-y="6"></span>
+		<span data-x="8" data-y="6"></span>
+		<span data-x="9" data-y="6"></span>
+		<span data-x="0" data-y="7"></span>
+		<span data-x="1" data-y="7"></span>
+		<span data-x="2" data-y="7"></span>
+		<span data-x="3" data-y="7"></span>
+		<span data-x="4" data-y="7"></span>
+		<span data-x="5" data-y="7"></span>
+		<span data-x="6" data-y="7"></span>
+		<span data-x="7" data-y="7"></span>
+		<span data-x="8" data-y="7"></span>
+		<span data-x="9" data-y="7"></span>
+		<span data-x="0" data-y="8"></span>
+		<span data-x="1" data-y="8"></span>
+		<span data-x="2" data-y="8"></span>
+		<span data-x="3" data-y="8"></span>
+		<span data-x="4" data-y="8"></span>
+		<span data-x="5" data-y="8"></span>
+		<span data-x="6" data-y="8"></span>
+		<span data-x="7" data-y="8"></span>
+		<span data-x="8" data-y="8"></span>
+		<span data-x="9" data-y="8"></span>
+		<span data-x="0" data-y="9"></span>
+		<span data-x="1" data-y="9"></span>
+		<span data-x="2" data-y="9"></span>
+		<span data-x="3" data-y="9"></span>
+		<span data-x="4" data-y="9"></span>
+		<span data-x="5" data-y="9"></span>
+		<span data-x="6" data-y="9"></span>
+		<span data-x="7" data-y="9"></span>
+		<span data-x="8" data-y="9"></span>
+		<span data-x="9" data-y="9"></span>
+	</div>
+	<button id="next-gen">Siguiente generación</button>
+	<button id="auto">Auto</button>
+	<button id="stop">Stop</button>
+	<button id="reset">Reset</button>
+</body>
+<script>
+	
+	(function(){
+		
+
+		//
+
+		function toggleClassDeadOrAlive($e){
+			$e.target.classList.toggle('alive');
+		}
+
+		function addToggleSpanClassFunction(){
+			document.querySelectorAll('#grid span').forEach($item => {
+				$item.addEventListener('click', toggleClassDeadOrAlive);
+			});
+		}
+
+		//
+		function giveLifeToCells($array){
+			$array.forEach($item => {
+				$item.classList.remove('alive');
+				$item.classList.add('alive');
+			});
+		}
+		function killCells($array){
+			$array.forEach($item => {
+				$item.classList.remove('alive');
+			});
+		}
+		function getNextGen($e){
+			let aliveNextGen = [];
+			let deadNextGen  = [];
+			
+			document.querySelectorAll('#grid span').forEach($item => {
+				checkNeighbors($item);
+			});
+
+			giveLifeToCells(aliveNextGen);
+			killCells(deadNextGen);
+
+			aliveNextGen = [];
+			deadNextGen = [];
+			//boolean
+			function isValidCoordinate($num){
+				$num = $num == -0 ? 0 : $num; //-0 makes first condition fail
+				return (($num >= 0) && ($num <= 9));
+			}
+			function checkNeighborIsAlive($x, $y){
+				// console.log($x, $y, (isValidCoordinate($x) && isValidCoordinate($y)));
+				if(isValidCoordinate($x) && isValidCoordinate($y)){
+					return document.querySelector(`#grid span[data-x="${$x}"][data-y="${$y}"]`).classList.contains('alive');					
+				}
+				return false;
+			}
+
+			function checkNeighbors($span){
+				let {x, y} = $span.dataset;
+				x = parseInt(x);
+				y = parseInt(y);
+				let answers = [
+					checkNeighborIsAlive(x - 1, y - 1),
+					checkNeighborIsAlive(x    , y - 1),
+					checkNeighborIsAlive(x + 1, y - 1),
+					checkNeighborIsAlive(x - 1, y    ),
+					checkNeighborIsAlive(x + 1, y    ),
+					checkNeighborIsAlive(x - 1, y + 1),
+					checkNeighborIsAlive(x    , y + 1),
+					checkNeighborIsAlive(x + 1, y + 1)
+				];
+				// console.log(`(x: ${x}, y: ${y})`);
+				let neighborsAlive = answers.filter($item => { return $item === true });
+				// console.log(neighborsAlive.length);
+				if(!$span.classList.contains('alive') && neighborsAlive.length === 3){
+					aliveNextGen.push($span);
+					return;
+				}
+				if($span.classList.contains('alive') && (neighborsAlive.length > 1 && neighborsAlive.length < 4)){
+					aliveNextGen.push($span);
+					return;
+				}
+				if($span. classList.contains('alive') && (neighborsAlive.length < 2 || neighborsAlive.length > 3)){
+					deadNextGen.push($span);
+					return;
+				}
+			}
+		}
+		function addClickNextGenBtnFunction(){
+			document.querySelector('#next-gen').addEventListener('click', getNextGen);
+		}
+
+		//
+		var intervalId = "";
+		function addAutoBtnFunction(){
+			document.querySelector('#auto').addEventListener('click', $e => {
+				intervalId = setInterval(getNextGen, 3000);
+
+			});
+		}
+		function addStopBtnFunction(){
+			document.querySelector('#stop').addEventListener('click', $e => {
+				clearInterval(intervalId);
+			});
+		}
+		function addResetBtnFunction(){
+			document.querySelector('#reset').addEventListener('click', $e => {
+				document.querySelectorAll('#grid span').forEach($item => {
+					$item.removeAttribute('class');
+				});
+			});
+		}
+
+		addToggleSpanClassFunction();
+		addClickNextGenBtnFunction();
+		addAutoBtnFunction();
+ 		addStopBtnFunction();
+		addResetBtnFunction();
+
+	})();
+
+</script>
+</html>
